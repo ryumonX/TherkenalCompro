@@ -1,34 +1,34 @@
 {{-- views/layouts/top-header.blade.php --}}
 
 <!-- Top Header dengan pure Tailwind CSS -->
-<header class="sticky top-0 right-0 left-0 z-20 bg-white border-b border-gray-200 shadow-sm">
+<header class="sticky top-0 right-0 left-0 z-30 bg-white border-b border-gray-200 shadow-sm">
     <div class="flex items-center justify-between h-16 px-4 lg:px-6">
         <!-- Left section with mobile menu button and title -->
         <div class="flex items-center">
             <!-- Mobile menu button -->
-            <button id="mobile-menu-button" class="p-2 mr-2 text-gray-600 rounded-md hover:bg-gray-100 lg:hidden">
+            <button id="mobile-menu-button" class="p-2 mr-2 text-gray-600 rounded-md hover:bg-gray-100 lg:hidden focus:outline-none focus:ring-2 focus:ring-gray-200">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
 
             <!-- Page title - transisi akan ditangani oleh JavaScript -->
-            <h1 id="header-title" class="text-base font-medium text-gray-800 transition-all duration-300">
+            <h1 id="header-title" class="text-base font-medium text-gray-800 transition-all duration-300 truncate max-w-[200px] sm:max-w-full">
                 Dashboard
             </h1>
         </div>
 
         <!-- Right section with user profile -->
         <div class="relative">
-            <button id="user-menu-button" class="flex items-center space-x-3 group">
-                <div class="flex flex-col items-end">
-                    <span class="text-sm font-medium text-gray-700">{{ Auth::user()->name ?? 'Admin' }}</span>
+            <button id="user-menu-button" class="flex items-center group focus:outline-none">
+                <div class="flex-col items-end mr-2 hidden sm:flex">
+                    <span class="text-sm font-medium text-gray-700 truncate max-w-[120px]">{{ Auth::user()->name ?? 'Admin' }}</span>
                     <span class="text-xs text-gray-500">Administrator</span>
                 </div>
                 <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-semibold">
                     {{ Auth::user()->name ? substr(Auth::user()->name, 0, 1) : 'A' }}
                 </div>
-                <svg class="w-5 h-5 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <svg class="w-5 h-5 text-gray-400 group-hover:text-gray-500 ml-1 sm:ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
             </button>

@@ -30,7 +30,7 @@
             left: 0;
             height: 100vh;
             z-index: 40;
-            transition: width 0.3s ease;
+            transition: width 0.3s ease, transform 0.3s ease;
             overflow-y: auto;
             background-color: white;
             border-right: 1px solid #e5e7eb;
@@ -64,24 +64,49 @@
         .main-content {
             padding-left: 70px;
             transition: padding-left 0.3s ease;
+            width: 100%;
         }
 
         .main-content.expanded {
             padding-left: 256px;
         }
 
-        .mobile-sidebar {
-            transform: translateX(-100%);
-        }
+        /* Mobile sidebar handling */
+        @media (max-width: 1023px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 50;
+            }
 
-        .mobile-sidebar.open {
-            transform: translateX(0);
-        }
+            .sidebar.open {
+                transform: translateX(0);
+            }
 
-        @media (max-width: 1024px) {
             .main-content {
                 padding-left: 0;
             }
+
+            .main-content.expanded {
+                padding-left: 0;
+            }
+        }
+
+        /* Tambahan untuk table responsif */
+        .responsive-table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Animasi untuk dropdown */
+        @keyframes slideDown {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .dropdown-animate {
+            animation: slideDown 0.2s ease forwards;
         }
     </style>
 </head>
@@ -95,9 +120,9 @@
             @include('layouts.navigation')
 
             <!-- Main Content -->
-            <main id="main-content" class="main-content flex-1">
+            <main id="main-content" class="main-content flex-1 overflow-hidden">
                 <!-- Page Content -->
-                <div class="p-6">
+                <div class="p-4 sm:p-6">
                     @yield('content')
                     {{ $slot ?? '' }}
                 </div>
@@ -132,7 +157,7 @@
                 }
             }
 
-            // Toggle sidebar on button click
+            // Toggle sidebar on button click (desktop only)
             sidebarToggle?.addEventListener('click', function() {
                 sidebar.classList.toggle('expanded');
                 mainContent.classList.toggle('expanded');
@@ -142,21 +167,24 @@
                 // Sesuaikan posisi header title
                 adjustHeaderTitle();
 
-                // Save state to localStorage
-                localStorage.setItem('sidebar-expanded', sidebar.classList.contains('expanded'));
+                // Save state to localStorage (only for desktop)
+                if (window.innerWidth >= 1024) {
+                    localStorage.setItem('sidebar-expanded', sidebar.classList.contains('expanded'));
+                }
             });
 
             // Mobile menu toggle
             mobileMenuButton?.addEventListener('click', function() {
-                sidebar.classList.toggle('mobile-sidebar');
                 sidebar.classList.toggle('open');
                 sidebarBackdrop.classList.toggle('hidden');
+                document.body.classList.toggle('overflow-hidden'); // Prevent scrolling when menu is open
             });
 
             // Close mobile menu when clicking on backdrop
             sidebarBackdrop?.addEventListener('click', function() {
                 sidebar.classList.remove('open');
                 sidebarBackdrop.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
             });
 
             // User dropdown functionality
@@ -164,7 +192,8 @@
             const userDropdown = document.getElementById('user-dropdown');
 
             if (userMenuButton && userDropdown) {
-                userMenuButton.addEventListener('click', function() {
+                userMenuButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
                     // Toggle dropdown
                     if (userDropdown.classList.contains('hidden')) {
                         // Show dropdown
@@ -172,10 +201,10 @@
                         // Force repaint before removing opacity/scale classes for transition to work
                         userDropdown.getBoundingClientRect();
                         userDropdown.classList.remove('opacity-0', 'scale-95');
-                        userDropdown.classList.add('opacity-100', 'scale-100');
+                        userDropdown.classList.add('opacity-100', 'scale-100', 'dropdown-animate');
                     } else {
                         // Hide dropdown
-                        userDropdown.classList.remove('opacity-100', 'scale-100');
+                        userDropdown.classList.remove('opacity-100', 'scale-100', 'dropdown-animate');
                         userDropdown.classList.add('opacity-0', 'scale-95');
 
                         // Wait for transition to finish before hiding
@@ -190,7 +219,7 @@
                     if (!userMenuButton.contains(event.target) && !userDropdown.contains(event.target) &&
                         !userDropdown.classList.contains('hidden')) {
                         // Hide dropdown
-                        userDropdown.classList.remove('opacity-100', 'scale-100');
+                        userDropdown.classList.remove('opacity-100', 'scale-100', 'dropdown-animate');
                         userDropdown.classList.add('opacity-0', 'scale-95');
 
                         // Wait for transition to finish before hiding
@@ -201,24 +230,43 @@
                 });
             }
 
-            // Load saved sidebar state on page load
-            if (localStorage.getItem('sidebar-expanded') === 'true') {
+            // Load saved sidebar state on page load (desktop only)
+            if (window.innerWidth >= 1024 && localStorage.getItem('sidebar-expanded') === 'true') {
                 sidebar.classList.add('expanded');
                 mainContent.classList.add('expanded');
                 collapseIcon.classList.remove('hidden');
                 expandIcon.classList.add('hidden');
             }
 
+            // Close the mobile menu when window is resized to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 1024) {
+                    sidebar.classList.remove('open');
+                    sidebarBackdrop.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                }
+                adjustHeaderTitle();
+            });
+
             // Inisialisasi posisi header title saat halaman dimuat
             adjustHeaderTitle();
 
-            // Perbarui posisi saat ukuran window berubah
-            window.addEventListener('resize', adjustHeaderTitle);
+            // Make tables responsive
+            const tables = document.querySelectorAll('table');
+            tables.forEach(table => {
+                const parent = table.parentNode;
+                if (!parent.classList.contains('responsive-table') && !parent.classList.contains('overflow-x-auto')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.classList.add('responsive-table');
+                    parent.insertBefore(wrapper, table);
+                    wrapper.appendChild(table);
+                }
+            });
 
             // Set page title dynamically (optional)
             const pageTitle = document.title.split(' - ').pop();
             if (headerTitle && pageTitle) {
-                headerTitle.textContent = "Dashboard";
+                headerTitle.textContent = pageTitle || "Dashboard";
             }
         });
     </script>

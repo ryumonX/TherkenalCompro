@@ -145,4 +145,4 @@ $navGroups = [
 </aside>
 
 <!-- Mobile sidebar backdrop -->
-<div id="sidebar-backdrop" class="fixed inset-0 bg-gray-600 bg-opacity-75 z-30 hidden lg:hidden transition-opacity duration-300 ease-in-out"></div>
+<div id="sidebar-backdrop" class="fixed inset-0 bg-gray-600 bg-opacity-75 z-40 hidden lg:hidden transition-opacity duration-300 ease-in-out"></div>
