@@ -9,10 +9,15 @@ use Illuminate\Http\Request;
 
 class GaleriProdukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $hero   = HeroGaleriProduk::firstOrCreate([]);
-        $galeri = $hero->galeri;
+        $hero = HeroGaleriProduk::firstOrCreate([]);
+        // Build gallery query
+        $query = $hero->galeri();
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%'.$request->search.'%');
+        }
+        $galeri = $query->get();
         return view('admin.galeri-produk.index', compact('hero','galeri'));
     }
 

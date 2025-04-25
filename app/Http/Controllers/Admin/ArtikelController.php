@@ -11,10 +11,18 @@ use Illuminate\Support\Facades\Storage;
 
 class ArtikelController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $artikels = Artikel::with('kategori')->latest()->paginate(20);
-        return view('admin.artikel.index', compact('artikels'));
+        $query = Artikel::with('kategori')->latest();
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%'.$request->search.'%');
+        }
+        if ($request->filled('kategori_artikel_id')) {
+            $query->where('kategori_artikel_id', $request->kategori_artikel_id);
+        }
+        $artikels = $query->paginate(20)->appends($request->only('search', 'kategori_artikel_id'));
+        $kategoriList = KategoriArtikel::pluck('title', 'id');
+        return view('admin.artikel.index', compact('artikels', 'kategoriList'));
     }
 
     public function create()

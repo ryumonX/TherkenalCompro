@@ -9,9 +9,14 @@ use Illuminate\Support\Str;
 
 class KategoriArtikelController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kategori = KategoriArtikel::latest()->paginate(15);
+        $query = KategoriArtikel::withCount('artikels')->latest();
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%'.$request->search.'%');
+        }
+        $kategori = $query->paginate(15)
+            ->appends(['search' => $request->search]);
         return view('admin.kategori-artikel.index', compact('kategori'));
     }
 

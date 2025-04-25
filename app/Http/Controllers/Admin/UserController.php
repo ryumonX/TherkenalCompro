@@ -13,9 +13,14 @@ class UserController extends Controller
     /**
      * Menampilkan daftar pengguna.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::latest()->paginate(10);
+        $query = User::latest();
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%'.$request->search.'%');
+        }
+        $users = $query->paginate(10)
+            ->appends(['search' => $request->search]);
         return view('admin.users.index', compact('users'));
     }
 
@@ -88,12 +93,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        // Cegah pengguna menghapus dirinya sendiri
-        if($user->id === auth()->id()) {
-            return back()->with('error', 'Anda tidak dapat menghapus akun yang sedang digunakan');
+        // Prevent deleting own account
+        if ($user->id === auth()->id()) {
+            return back()->with('error', 'Tidak dapat menghapus akun sendiri.');
         }
-
         $user->delete();
-        return back()->with('success', 'Pengguna berhasil dihapus');
+        return back()->with('success','Pengguna dihapus');
     }
 }

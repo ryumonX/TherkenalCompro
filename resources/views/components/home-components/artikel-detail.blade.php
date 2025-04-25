@@ -63,7 +63,7 @@ if (empty($artikelTerbaru)) {
       </div>
 
       <!-- Title -->
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-8">
+      <h1 class="text-3xl sm:text-4xl md:text-4xl font-bold text-gray-900 leading-tight mb-8">
         {{ $artikel->title }}
       </h1>
 

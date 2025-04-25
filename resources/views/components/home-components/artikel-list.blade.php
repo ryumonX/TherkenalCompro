@@ -152,7 +152,7 @@
 
               <!-- Content -->
               <div class="p-6 flex flex-col flex-grow">
-                <a href="{{ route('artikel.detail', $post->slug) }}" target="_blank" class="text-xl font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-blue-700 transition-colors">
+                <a href="{{ route('artikel.detail', $post->slug) }}" class="text-xl font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-blue-700 transition-colors">
                   {{ $post->title }}
                 </a>
 
@@ -162,7 +162,7 @@
 
                 <!-- Read more link dengan efek underline animation -->
                 <div class="mt-2">
-                  <a href="{{ route('artikel.detail', $post->slug) }}" target="_blank" class="inline-flex items-center text-blue-600 font-semibold group/link relative">
+                  <a href="{{ route('artikel.detail', $post->slug) }}" class="inline-flex items-center text-blue-600 font-semibold group/link relative">
                     <span class="relative z-10">
                       Baca Selengkapnya
                       <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-600 group-hover/link:w-full transition-all duration-300 ease-out"></span>
@@ -350,7 +350,7 @@
           <div class="relative">
             <h4 class="text-lg font-semibold mb-2">Konsultasi Gratis</h4>
             <p class="text-blue-100 text-sm mb-4">Dapatkan konsultasi gratis untuk kebutuhan atap rumah atau bangunan Anda dari tim ahli kami.</p>
-            <a href="#" class="inline-flex items-center text-white bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+            <a href="/kontak" class="inline-flex items-center text-white bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
               Hubungi Kami
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />

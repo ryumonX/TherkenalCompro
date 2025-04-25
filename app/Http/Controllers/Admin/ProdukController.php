@@ -8,9 +8,14 @@ use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $produks = Produk::latest()->paginate(20);
+        $query = Produk::latest();
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%'.$request->search.'%');
+        }
+        $produks = $query->paginate(20)
+            ->appends(['search' => $request->search]);
         return view('admin.produk.index', compact('produks'));
     }
 

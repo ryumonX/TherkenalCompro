@@ -38,7 +38,7 @@
                 <i class="fas fa-check"></i>
               </div>
             </div>
-            <h2 class="ml-3 text-xl font-bold">{{ $configWeb->title ?? 'AtapPro' }}</h2>
+
           @else
             <div class="relative bg-white p-2 rounded-lg shadow-lg">
               <div class="flex items-center">
@@ -53,6 +53,7 @@
           @endif
         </div>
 
+        <h2 class="text-lg mb-2 font-bold">{{ $configWeb->title ?? 'AtapPro' }}</h2>
         <p class="text-gray-400 mb-6 leading-relaxed">
           {{ $configWeb->subtitle ?? 'PT Atap Profesional Indonesia adalah perusahaan spesialis atap terkemuka yang menyediakan solusi atap berkualitas tinggi untuk berbagai jenis bangunan sejak 2010.' }}
         </p>
@@ -161,7 +162,7 @@
             <div class="absolute left-0 bottom-0 h-1 w-10 bg-gradient-to-r from-blue-500 to-blue-400"></div>
           </h3>
           <div class="space-y-4">
-            @forelse($displayArtikel->take(2) as $post)
+            @forelse($displayArtikel->take(3) as $post)
               <a href="{{ route('artikel.detail', $post->slug) }}" class="group flex gap-3 p-2 rounded-lg hover:bg-gray-800 transition-colors duration-300">
                 <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
                   <img

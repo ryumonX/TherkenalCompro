@@ -24,6 +24,16 @@
             </a>
         </div>
 
+        {{-- filter form --}}
+        <div class="px-6 py-4 border-b">
+            <form method="GET" class="flex flex-wrap items-center gap-4">
+                <input type="text" name="search" value="{{ request('search') }}"
+                    placeholder="Cari nama pengguna..."
+                    class="px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400">
+                <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg">Cari</button>
+            </form>
+        </div>
+
         {{-- table --}}
         <div class="overflow-x-auto">
             <table class="min-w-full text-sm whitespace-nowrap">
@@ -69,7 +79,7 @@
 
         {{-- pagination --}}
         <div class="p-4">
-            {{ $users->links() }}
+            {{ $users->appends(request()->query())->links() }}
         </div>
     </div>
 @endsection

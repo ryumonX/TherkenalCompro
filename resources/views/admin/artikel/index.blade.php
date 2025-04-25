@@ -18,6 +18,50 @@
             </a>
         </div>
 
+        {{-- filter form --}}
+        <div class="px-4 sm:px-6 py-4 border-b">
+            <form method="GET" class="space-y-3 sm:space-y-0 sm:flex sm:flex-wrap sm:items-center sm:gap-4">
+                <!-- Search Input -->
+                <div class="w-full sm:w-auto">
+                    <input
+                        type="text"
+                        name="search"
+                        value="{{ request('search') }}"
+                        placeholder="Cari judul..."
+                        class="w-full sm:w-48 px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400"
+                    >
+                </div>
+
+                <!-- Category Select -->
+                <div class="w-full sm:w-auto">
+                    <select
+                        name="kategori_artikel_id"
+                        class="w-full sm:w-48 px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400"
+                    >
+                        <option value="">Semua Kategori</option>
+                        @foreach($kategoriList as $id => $title)
+                            <option
+                                value="{{ $id }}"
+                                {{ request('kategori_artikel_id') == $id ? 'selected' : '' }}
+                            >
+                                {{ $title }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- Filter Button -->
+                <div class="w-full sm:w-auto">
+                    <button
+                        type="submit"
+                        class="w-full sm:w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition duration-150 ease-in-out"
+                    >
+                        Filter
+                    </button>
+                </div>
+            </form>
+        </div>
+
         {{-- table --}}
         <div class="overflow-x-auto">
             <table class="min-w-full text-sm whitespace-nowrap">

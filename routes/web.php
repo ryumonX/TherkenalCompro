@@ -141,7 +141,7 @@ Route::prefix('admin')
             ->names('artikel')
             ->middleware('auth');
 
-        // Route untuk upload gambar ke CKEditor
+        // Route upload gambar ke CKEditor
         Route::post('artikel/upload-image', [ArtikelController::class, 'uploadImage'])
             ->name('artikel.upload.image')
             ->middleware('auth');

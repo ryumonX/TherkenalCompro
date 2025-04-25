@@ -15,7 +15,7 @@
     </svg>
   </div>
 
-  <div class="container mx-auto px-4 lg:px-0 relative z-10">
+  <div class="container mx-auto px-4 relative z-10">
     <!-- Header Section yang lebih menarik -->
     <div class="text-center mb-12">
         <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 mb-4">
@@ -64,7 +64,7 @@
 
               <!-- Content -->
               <div class="p-6 flex flex-col flex-grow">
-                <a href="{{ route('artikel.detail', $post->slug) }}" target="_blank" class="text-xl font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-blue-700 transition-colors">
+                <a href="{{ route('artikel.detail', $post->slug) }}" class="text-xl font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-blue-700 transition-colors">
                   {{ $post->title }}
                 </a>
 
@@ -74,7 +74,7 @@
 
                 <!-- Read more link dengan efek underline animation -->
                 <div class="mt-2">
-                  <a href="{{ route('artikel.detail', $post->slug) }}" target="_blank" class="inline-flex items-center text-blue-600 font-semibold group/link relative">
+                  <a href="{{ route('artikel.detail', $post->slug) }}" class="inline-flex items-center text-blue-600 font-semibold group/link relative">
                     <span class="relative z-10">
                       Baca Selengkapnya
                       <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-600 group-hover/link:w-full transition-all duration-300 ease-out"></span>
@@ -285,7 +285,7 @@
                   <!-- Glow effect -->
                   <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 opacity-0 group-hover:opacity-70 blur-md transition-all duration-300 group-hover:duration-200"></div>
 
-                  <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-200 relative p-2 transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg">
+                  <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-300 relative p-2 transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg">
                     <img
                       src="{{ asset('storage/' . $social->images->first()->image) }}"
                       alt="{{ $social->platform }}"

@@ -8,9 +8,27 @@ use Illuminate\Http\Request;
 
 class FormKontakController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $pesan = FormKontak::latest()->paginate(25);
+        $query = FormKontak::query();
+        // Search by name, email, or message
+        if ($request->filled('search')) {
+            $s = $request->search;
+            $query->where(function($q) use ($s) {
+                $q->where('nama', 'like', "%{$s}%")
+                  ->orWhere('email', 'like', "%{$s}%")
+                  ->orWhere('pesan', 'like', "%{$s}%");
+            });
+        }
+        // Order: newest or oldest
+        if ($request->order === 'oldest') {
+            $query->orderBy('created_at', 'asc');
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+        // Paginate with query params
+        $pesan = $query->paginate(25)
+            ->appends($request->only('search','order'));
         return view('admin.form-kontak.index', compact('pesan'));
     }
 
