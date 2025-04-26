@@ -134,6 +134,8 @@
         // Editor untuk deskripsi
         CKEDITOR.replace('editor', {
             toolbar: [
+                { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+                { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
                 { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
                 { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
                 { name: 'insert', items: ['Link', 'Unlink'] },

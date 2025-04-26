@@ -251,9 +251,9 @@
                   </div>
 
                   <!-- Counter badge -->
-                  @if(isset($kategori->artikel_count))
+                  @if(isset($kategori->artikel))
                     <span class="bg-gray-100 text-gray-600 group-hover:bg-blue-100 group-hover:text-blue-700 text-xs px-2 py-1 rounded-full transition-colors">
-                      {{ $kategori->artikel_count }}
+                      {{ $kategori->artikel->count() }}
                     </span>
                   @endif
                 </a>

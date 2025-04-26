@@ -56,7 +56,7 @@
             <!-- Title and Subtitle Section (Left) -->
             <div class="md:w-1/2 text-center">
                 @if($hero)
-                    <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-6 text-center">{{ $hero->title }}</h2>
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-2 text-center">{{ $hero->title }}</h2>
                     <p class="text-md md:text-md text-gray-600 mb-8 text-center">
                         {{ $hero->subtitle }}
                     </p>
