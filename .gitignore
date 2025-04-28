@@ -2,6 +2,7 @@
 /node_modules
 /public/hot
 /vendor
+public/storage
 .env
 .env.backup
 .env.production
