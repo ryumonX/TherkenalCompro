@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.apache
+    container_name: app-laravel
+    ports:
+      - "80"
+    env_file:
+      - .env
+    environment:
+      - APP_KEY=${APP_KEY}
+      - APP_ENV=${APP_ENV:-staging}
+      - APP_DEBUG=${APP_DEBUG:-true}
+    volumes:
+      - ./storage/app:/var/www/html/storage/app:delegated
+      - ./storage/framework:/var/www/html/storage/framework:delegated
+      - ./bootstrap/cache:/var/www/html/bootstrap/cache:delegated
+    networks:
+      - default
+      - external_network
+    restart: unless-stopped
+
+networks:
+  default:
+    driver: bridge
+  external_network:
+    external: true
+    name: coolify  # gunakan network Coolify yang sudah ada
+    
+volumes:
+  app_public:  # Shared volume for the public directory

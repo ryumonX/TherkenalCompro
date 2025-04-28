@@ -1,0 +1,98 @@
+FROM php:8.2-apache
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+  libzip-dev \
+  zip \
+  unzip \
+  git \
+  libonig-dev \
+  libxml2-dev \
+  libpng-dev \
+  libjpeg62-turbo-dev \
+  libfreetype6-dev \
+  libgmp-dev \
+  sudo \
+  curl \
+  gnupg \
+  nano \
+  libpq-dev \
+  libicu-dev \
+  libmagickwand-dev \
+&& docker-php-ext-install intl
+
+# Install Node.js 20.x
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+  && apt-get install -y nodejs
+
+# Configure and install PHP extensions with FreeType support
+RUN docker-php-ext-configure gd --with-jpeg --with-freetype
+RUN docker-php-ext-install -j$(nproc) pdo_mysql mbstring exif pcntl bcmath zip gmp opcache pdo_pgsql gd
+
+# Install Imagick PHP extension
+RUN pecl install imagick && docker-php-ext-enable imagick
+
+# Enable Apache modules
+RUN a2enmod rewrite headers
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Configure Apache document root
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+# Create directory for PHP logs
+RUN mkdir -p /var/log/php && chown -R www-data:www-data /var/log/php
+
+# Copy application files
+COPY . /var/www/html
+
+# Create Laravel cache directories and set permissions
+RUN mkdir -p /var/www/html/storage/framework/cache/data \
+  && mkdir -p /var/www/html/storage/framework/sessions \
+  && mkdir -p /var/www/html/storage/framework/views \
+  && mkdir -p /var/www/html/storage/app/public \
+  && mkdir -p /var/www/html/storage/logs \
+  && mkdir -p /var/www/html/bootstrap/cache \
+  && chown -R www-data:www-data /var/www/html/storage \
+  && chown -R www-data:www-data /var/www/html/bootstrap/cache \
+  && chmod -R 775 /var/www/html/storage \
+  && chmod -R 775 /var/www/html/bootstrap/cache
+
+# Install dependencies and build assets
+RUN composer config --no-plugins allow-plugins.php-http/discovery true \
+  && composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
+
+# Clear Laravel caches
+RUN php artisan config:clear || echo "Could not clear config."
+RUN php artisan cache:clear || echo "Could not clear cache."
+RUN php artisan view:clear || echo "Could not clear views."
+
+# Verify Node.js version and install npm dependencies
+RUN node -v \
+  && npm -v \
+  && npm install \
+  && npm run build
+
+# Generate key and create storage link manually
+RUN php artisan key:generate --force || echo "Key generation failed, will be handled by entrypoint script" \
+  && php artisan storage:link || echo "Storage link creation failed, will be handled by entrypoint script"
+
+# Set up entrypoint script
+COPY docker/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Set proper permissions for Apache
+RUN chown -R www-data:www-data /var/www/html
+
+# Set proper Apache configuration with security headers
+COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
+
+# Ensure entrypoint is executed
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["apache2-foreground"]
