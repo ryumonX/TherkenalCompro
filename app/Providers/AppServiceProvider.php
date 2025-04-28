@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\BreadCrumb;
+use App\Models\Breadcrumb;
 use App\Models\ConfigWeb;
 use App\Models\Kontak;
 use App\Models\SocialMedia;
@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'configWeb' => ConfigWeb::first(),
                 'kontak' => Kontak::first(),
-                'breadcrumb' => BreadCrumb::first(),
+                'breadcrumb' => Breadcrumb::first(),
                 'hubungiKami' => HubungiKami::first(),
                 'socialMedia' => SocialMedia::active()->with('images')->get(),
                 'footerProduk' => Produk::active()->latest()->take(5)->get(),

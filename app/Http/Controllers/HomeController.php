@@ -16,7 +16,7 @@ use App\Models\HeroItem;
 use App\Models\HubungiKami;
 use App\Models\Keunggulan;
 use App\Models\KeunggulanItem;
-use App\Models\BreadCrumb;
+use App\Models\Breadcrumb;
 use App\Models\FormKontak;
 use App\Models\GaleriProduk;
 use App\Models\HeroGaleriProduk;
@@ -69,7 +69,7 @@ class HomeController extends Controller
             'configWeb' => ConfigWeb::first(),
             'socialMedia' => SocialMedia::active()->with('images')->get(),
             'kontak' => Kontak::first(),
-            'breadcrumb' => BreadCrumb::first(),
+            'breadcrumb' => Breadcrumb::first(),
         ];
 
         return view('artikel-detail', $data);
@@ -114,7 +114,7 @@ class HomeController extends Controller
             'configWeb' => ConfigWeb::first(),
             'socialMedia' => SocialMedia::active()->with('images')->get(),
             'kontak' => Kontak::first(),
-            'breadcrumb' => BreadCrumb::first(),
+            'breadcrumb' => Breadcrumb::first(),
         ];
 
         return view('artikel', $data);
@@ -139,7 +139,7 @@ class HomeController extends Controller
             'configWeb' => ConfigWeb::first(),
             'socialMedia' => SocialMedia::active()->with('images')->get(),
             'kontak' => Kontak::first(),
-            'breadcrumb' => BreadCrumb::first(),
+            'breadcrumb' => Breadcrumb::first(),
         ];
 
         return view('produk-detail', $data);
@@ -158,7 +158,7 @@ class HomeController extends Controller
             'configWeb' => ConfigWeb::first(),
             'socialMedia' => SocialMedia::active()->with('images')->get(),
             'kontak' => Kontak::first(),
-            'breadcrumb' => BreadCrumb::first(),
+            'breadcrumb' => Breadcrumb::first(),
         ];
 
         return view('produk', $data);
@@ -176,7 +176,7 @@ class HomeController extends Controller
             // Data umum
             'configWeb' => ConfigWeb::first(),
             'socialMedia' => SocialMedia::active()->with('images')->get(),
-            'breadcrumb' => BreadCrumb::first(),
+            'breadcrumb' => Breadcrumb::first(),
         ];
 
         return view('kontak', $data);
@@ -224,7 +224,7 @@ class HomeController extends Controller
             'hero' => Hero::first(),
             'hubungiKami' => HubungiKami::first(),
             'keunggulan' => Keunggulan::first(),
-            'breadcrumb' => BreadCrumb::first(),
+            'breadcrumb' => Breadcrumb::first(),
             'heroGaleriProduk' => HeroGaleriProduk::first(),
         ];
 
