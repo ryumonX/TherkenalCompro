@@ -47,4 +47,4 @@ chown -R www-data:www-data /var/www/html/storage/logs
 chmod -R 755 /var/www/html/storage/logs
 
 # Execute the passed command
-exec apache2-foreground
+exec "$@"
