@@ -10,7 +10,17 @@ class ConfigWebController extends Controller
 {
     public function edit()
     {
-        $config = ConfigWeb::firstOrCreate([]);
+        $config = ConfigWeb::firstOrCreate(
+            [],
+            [
+                'logo'        => 'path/to/default-logo.png',
+                'favicon'     => 'path/to/default-favicon.ico',
+                'title'       => 'Judul Website Anda',
+                'subtitle'    => 'Subtitle atau slogan website.',
+                'website_url' => 'https://example.com',
+                'copyright'   => '© 2025 Nama Perusahaan Anda.',
+            ]
+        );
         return view('admin.config-web.index', compact('config'));
     }
 

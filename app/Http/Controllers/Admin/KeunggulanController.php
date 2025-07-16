@@ -11,7 +11,14 @@ class KeunggulanController extends Controller
 {
     public function index()
     {
-        $keunggulan = Keunggulan::firstOrCreate([]);
+        $keunggulan = Keunggulan::firstOrCreate(
+            [],
+            [
+                'title'       => 'Keunggulan Produk Kami',
+                'subtitle'    => 'Subtitle Default untuk Keunggulan',
+                'description' => 'Deskripsi default untuk bagian keunggulan.',
+            ]
+        );
         $items      = KeunggulanItem::latest()->get();
         return view('admin.keunggulan.index', compact('keunggulan','items'));
     }

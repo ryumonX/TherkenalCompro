@@ -12,9 +12,15 @@ class BannerLayananController extends Controller
     // Menampilkan Banner Layanan dan Item yang terkait
     public function index()
     {
-        // Mengambil data banner dan item banner secara terpisah tanpa relasi
-        $banner = BannerLayanan::firstOrCreate([]);
-        $items = BannerLayananItem::latest()->get(); // Ambil semua item banner
+        $banner = BannerLayanan::firstOrCreate(
+            [],
+            [
+                'title'       => 'Layanan Unggulan Kami',
+                'subtitle'    => 'Subtitle Default',
+                'description' => 'Deskripsi default untuk banner layanan.',
+            ]
+        );
+        $items = BannerLayananItem::latest()->get();
         return view('admin.bannerlayanan.index', compact('banner', 'items'));
     }
 

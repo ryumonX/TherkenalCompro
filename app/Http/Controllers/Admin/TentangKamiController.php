@@ -10,7 +10,15 @@ class TentangKamiController extends Controller
 {
     public function edit()
     {
-        $tentangKami = TentangKami::firstOrCreate([]);
+        $tentangKami = TentangKami::firstOrCreate(
+            [],
+            [
+                'title'       => 'Tentang Kami',
+                'subtitle'    => 'Subtitle Default',
+                'image'       => 'images/placeholder.jpg',
+                'description' => 'Kami adalah perusahaan yang bergerak di bidang industri makanan dan minuman.',
+            ]
+        );
         return view('admin.tentangkami.index', compact('tentangKami'));
     }
 

@@ -1,22 +1,22 @@
-{{-- views/layouts/app.blade.php --}}
+
 
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>" class="h-full">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title>{{ $configWeb?->title ?? 'Index' }}</title>
-    <link rel="icon" href="{{ asset('storage/' . $configWeb?->favicon) }}" type="image/x-icon">
-    @vite('resources/css/app.css')
+    <title><?php echo e($configWeb?->title ?? 'Index'); ?></title>
+    <link rel="icon" href="<?php echo e(asset('storage/' . $configWeb?->favicon)); ?>" type="image/x-icon">
+    <?php echo app('Illuminate\Foundation\Vite')('resources/css/app.css'); ?>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
 
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -113,25 +113,26 @@
 <body class="h-full font-sans antialiased bg-gray-50">
     <div class="min-h-screen">
         <!-- Include the top header component -->
-        @include('layouts.top-header')
+        <?php echo $__env->make('layouts.top-header', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
         <div class="flex h-full">
             <!-- Include the navigation/sidebar component -->
-            @include('layouts.navigation')
+            <?php echo $__env->make('layouts.navigation', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
             <!-- Main Content -->
             <main id="main-content" class="main-content flex-1 overflow-hidden">
                 <!-- Page Content -->
                 <div class="p-4 sm:p-6">
-                    @yield('content')
-                    {{ $slot ?? '' }}
+                    <?php echo $__env->yieldContent('content'); ?>
+                    <?php echo e($slot ?? ''); ?>
+
                 </div>
             </main>
         </div>
     </div>
 
-    @stack('modals')
-    @stack('scripts')
+    <?php echo $__env->yieldPushContent('modals'); ?>
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -272,3 +273,4 @@
     </script>
 </body>
 </html>
+<?php /**PATH C:\Users\lenovo\Documents\cv_berkah_usaha\resources\views/layouts/app.blade.php ENDPATH**/ ?>

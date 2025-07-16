@@ -12,7 +12,13 @@ class HeroController extends Controller
     /* --- Tampilkan form singleton + daftar item ---------------------- */
     public function index()
     {
-        $hero       = Hero::firstOrCreate([]);
+        $hero = Hero::firstOrCreate(
+            [],
+            [
+                'title' => 'Selamat Datang di PT. Testing',
+                'subtitle' => 'Kami adalah perusahaan yang bergerak di bidang industri makanan dan minuman.',
+            ]
+        );
         $heroItems  = HeroItem::all();
 
         return view('admin.hero.index', compact('hero', 'heroItems'));

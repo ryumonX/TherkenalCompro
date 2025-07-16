@@ -11,14 +11,25 @@ class GaleriProdukController extends Controller
 {
     public function index(Request $request)
     {
-        $hero = HeroGaleriProduk::firstOrCreate([]);
+        $hero = HeroGaleriProduk::firstOrCreate(
+            [],
+            [
+                'title'       => 'Galeri Produk Kami',
+                'subtitle'    => 'Lihat koleksi produk terbaik dari kami',
+                'description' => 'Deskripsi default untuk bagian galeri produk.',
+            ]
+        );
+
         // Build gallery query
         $query = $hero->galeri();
+
         if ($request->filled('search')) {
-            $query->where('title', 'like', '%'.$request->search.'%');
+            $query->where('title', 'like', '%' . $request->search . '%');
         }
+
         $galeri = $query->get();
-        return view('admin.galeri-produk.index', compact('hero','galeri'));
+
+        return view('admin.galeri-produk.index', compact('hero', 'galeri'));
     }
 
     public function updateHero(Request $request)
