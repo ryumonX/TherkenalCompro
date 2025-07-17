@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SosialMediaController;
 use App\Http\Controllers\Admin\TentangKamiController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 
@@ -92,6 +93,14 @@ Route::prefix('admin')
         */
         Route::get('tentang-kami',  [\App\Http\Controllers\Admin\TentangKamiController::class,'edit'])   ->name('tentang-kami.edit');
         Route::put('tentang-kami',  [\App\Http\Controllers\Admin\TentangKamiController::class,'update']) ->name('tentang-kami.update');
+
+        /* ------------------------------------------------------------------
+        | Partner
+        |------------------------------------------------------------------*/
+        Route::resource('partner', PartnerController::class)
+            ->except('show')
+            ->names('partner')
+            ->middleware('auth');
 
         /*
         |--------------------------------------------------------------------------
