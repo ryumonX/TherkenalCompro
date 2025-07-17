@@ -194,7 +194,7 @@
     <!-- Copyright -->
     <div class="border-t border-gray-800 mt-8 pt-8">
         <div class="text-gray-500 text-sm justify-center mx-auto w-max">
-          {{ $configWeb->copyright ?? '© 2025 Therkenal. Hak Cipta Dilindungi.' }}
+          {{ $configWeb->copyright ?? '© 2025 PT Atap Profesional Indonesia. Hak Cipta Dilindungi.' }}
         </div>
     </div>
   </div>
