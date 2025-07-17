@@ -1,322 +1,199 @@
 @props(['bannerLayanan' => null, 'bannerLayananItems' => []])
 
-<section class="py-16 md:py-20 lg:py-24 bg-gradient-to-r from-blue-600 to-blue-800 relative overflow-hidden">
-    <!-- Background Pattern dengan efek parallax -->
-    <div class="absolute inset-0 opacity-10 transform hover:scale-105 transition-transform duration-1000">
-        <img
-            src="{{ asset('images/banner-layanankami.jpg') }}"
-            alt="Background Pattern"
-            class="w-full h-full object-cover"
-        >
+<section class="min-h-screen bg-white relative overflow-hidden">
+    <!-- Creative Background Elements -->
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50"></div>
+    
+    <!-- Geometric Shapes -->
+    <div class="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full opacity-20 blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-cyan-100 to-blue-100 rounded-full opacity-20 blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    
+    <!-- Grid Pattern -->
+    <div class="absolute inset-0 opacity-[0.02]">
+        <div class="grid grid-cols-12 gap-4 h-full">
+            @for($i = 0; $i < 12; $i++)
+                <div class="border-r border-gray-300"></div>
+            @endfor
+        </div>
     </div>
 
-    <!-- Elemen dekoratif -->
-    <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-y-1/2"></div>
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-white opacity-5 rounded-full translate-y-1/3"></div>
-
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
-            <!-- Bagian Kiri - Konten Deskriptif -->
-            <div class="lg:w-2/5 text-white">
-                <!-- Badge untuk highlight -->
-                <div class="inline-flex items-center px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm mb-4">
-                    <span class="w-2 h-2 rounded-full bg-cyan-300 mr-2 animate-pulse"></span>
-                    <span class="text-sm font-semibold uppercase tracking-wider text-cyan-50"> {{ $bannerLayanan->title ?? 'Solusi Atap Premium untuk Setiap Kebutuhan' }}</span>
-                </div>
-
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mt-2 mb-6 leading-tight">
-                    {{ $bannerLayanan->subtitle ?? 'Solusi Atap Premium untuk Setiap Kebutuhan' }}
-                    <div class="h-1 w-24 bg-gradient-to-r from-cyan-300 to-white/70 mt-4 rounded-full"></div>
-                </h2>
-
-                <div class="mb-8 leading-relaxed text-blue-100">
-                    @if($bannerLayanan && $bannerLayanan->description)
-                        {!! nl2br(e($bannerLayanan->description)) !!}
-                    @else
-                        <p class="mb-4">
-                            Kami menyediakan berbagai layanan atap berkualitas tinggi untuk memenuhi kebutuhan Anda.
-                            Dari pemasangan atap baru, perbaikan, hingga perawatan rutin, tim profesional kami siap
-                            memberikan hasil terbaik dengan standar kualitas tertinggi.
-                        </p>
-                    @endif
-                </div>
-
-                <!-- Button dengan efek keren -->
-                <button onclick="window.location.href='/tentang-kami'" class="group relative overflow-hidden px-8 py-3 rounded-lg font-bold text-white bg-gradient-to-r from-blue-500 to-blue-500 shadow-lg hover:shadow-blue-500/30">
-                    <span class="relative z-10">Pelajari Lebih Lanjut</span>
-
-                    <!-- Button background effect -->
-                    <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 transform group-hover:translate-y-0 -translate-y-full transition-transform duration-500 ease-in-out"></span>
-                    <span class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 transform group-hover:translate-y-full translate-y-0 transition-transform duration-500 ease-in-out"></span>
-
-                    <!-- Button shine effect -->
-                    <span class="absolute inset-0 w-full bg-gradient-to-tr from-transparent via-white/20 to-transparent blur-sm transform group-hover:-translate-x-0 -translate-x-full transition-transform duration-500 ease-in-out"></span>
-                </button>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20">
+        <!-- Header Section -->
+        <div class="text-center mb-20">
+            <!-- Badge -->
+            <div class="inline-flex items-center px-4 py-2 bg-gray-100 rounded-full mb-6 hover:bg-gray-200 transition-colors">
+                <div class="w-2 h-2 bg-blue-500 rounded-full mr-3 animate-pulse"></div>
+                <span class="text-sm font-medium text-gray-700 uppercase tracking-widest">
+                    {{ $bannerLayanan->title ?? 'Our Services' }}
+                </span>
             </div>
 
-            <!-- Bagian Kanan - Kartu Layanan dengan slider untuk > 3 item atau grid untuk <= 3 item -->
-            <div class="lg:w-3/5 w-full">
+            <!-- Main Title -->
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-light text-gray-900 mb-6 leading-tight">
+                {{ $bannerLayanan->subtitle ?? 'Creative' }}
+                <span class="font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Solutions
+                </span>
+            </h1>
+
+            <!-- Description -->
+            <div class="max-w-2xl mx-auto text-gray-600 text-lg leading-relaxed mb-8">
+                @if($bannerLayanan && $bannerLayanan->description)
+                    {!! nl2br(e($bannerLayanan->description)) !!}
+                @else
+                    <p>We craft digital experiences that transform brands and drive results. Our team combines creativity with technical expertise to deliver outstanding solutions.</p>
+                @endif
+            </div>
+         
+        </div>
+
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            @forelse($bannerLayananItems as $index => $item)
+                <div class="group relative bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
+                    <!-- Number -->
+                    <div class="absolute top-6 right-6 text-6xl font-bold text-gray-100 group-hover:text-blue-100 transition-colors">
+                        {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
+                    </div>
+
+                    <!-- Icon -->
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        @if(!empty($item->image_icon))
+                            <img src="{{ asset('storage/' . $item->image_icon) }}" alt="{{ $item->title }}" class="w-8 h-8">
+                        @else
+                            <div class="w-8 h-8 bg-blue-500 rounded-lg"></div>
+                        @endif
+                    </div>
+
+                    <!-- Content -->
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                        {{ $item->title }}
+                    </h3>
+
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        {{ $item->description ?? '' }}
+                    </p>
+
+                    <!-- Learn More Link -->
+                    <a href="#" class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        Learn More
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+
+                    <!-- Hover Border -->
+                    <div class="absolute inset-0 border-2 border-blue-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+            @empty
                 @php
-                    $useSlider = (count($bannerLayananItems) > 3) || (empty($bannerLayananItems) && count($layananItems ?? []) > 3);
+                    $services = [
+                        [
+                            'title' => 'Brand Strategy',
+                            'description' => 'Comprehensive brand development that captures your unique essence and connects with your audience.',
+                            'color' => 'blue'
+                        ],
+                        [
+                            'title' => 'Digital Design',
+                            'description' => 'Modern, responsive designs that deliver exceptional user experiences across all devices.',
+                            'color' => 'purple'
+                        ],
+                        [
+                            'title' => 'Development',
+                            'description' => 'Cutting-edge web solutions built with the latest technologies and best practices.',
+                            'color' => 'cyan'
+                        ],
+                        [
+                            'title' => 'Marketing',
+                            'description' => 'Data-driven marketing strategies that amplify your brand and drive measurable results.',
+                            'color' => 'indigo'
+                        ],
+                        [
+                            'title' => 'Analytics',
+                            'description' => 'Deep insights and performance tracking to optimize your digital presence.',
+                            'color' => 'pink'
+                        ],
+                        [
+                            'title' => 'Consultation',
+                            'description' => 'Expert guidance and strategic planning to accelerate your business growth.',
+                            'color' => 'green'
+                        ]
+                    ];
                 @endphp
 
-                @if($useSlider)
-                    <!-- Swiper container -->
-                    <div class="swiper-layanan-container overflow-hidden">
-                        <div class="swiper-wrapper">
-                            @forelse($bannerLayananItems as $index => $item)
-                                <div class="swiper-slide px-2">
-                                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group relative
-                                        {{ $index % 3 == 1 ? 'sm:translate-y-8' : '' }}"
-                                    >
-                                        <!-- Icon dengan efek glow -->
-                                        <div class="relative">
-                                            <div class="absolute  bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full blur-lg opacity-0 group-hover:opacity-70 transition-opacity duration-500"></div>
-                                            <div class="w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto mt-6 relative">
-                                                @if(!empty($item->image_icon))
-                                                    <img src="{{ asset('storage/' . $item->image_icon) }}" alt="{{ $item->title }}" class="w-8 h-8">
-                                                @else
-                                                    <i class="fas fa-check text-blue-600 text-2xl"></i>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <!-- Content dengan efek hover -->
-                                        <div class="p-6 pt-2">
-                                            <h3 class="text-lg font-bold text-gray-800 mb-3 text-center group-hover:text-blue-600 transition-colors">
-                                                {{ $item->title }}
-                                            </h3>
-
-                                            <p class="text-gray-600 text-center text-sm mb-4">
-                                                {{ $item->description ?? '' }}
-                                            </p>
-                                        </div>
-
-                                        <!-- Border bottom accent -->
-                                        <div class="h-1 w-full bg-gradient-to-r from-blue-500 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                                    </div>
-                                </div>
-                            @empty
-                                <!-- Kartu dinamis tanpa hardcoded data -->
-                                @php
-                                    $layananItems = [
-                                        [
-                                            'icon' => 'fas fa-shield-alt',
-                                            'title' => 'Bahan Kokoh',
-                                            'description' => 'Material berkualitas tinggi yang tahan terhadap beban berat dan kondisi cuaca ekstrem.'
-                                        ],
-                                        [
-                                            'icon' => 'fas fa-tint-slash',
-                                            'title' => 'Anti Bocor',
-                                            'description' => 'Sistem pemasangan khusus yang menjamin atap Anda bebas dari kebocoran.'
-                                        ],
-                                        [
-                                            'icon' => 'fas fa-clock',
-                                            'title' => 'Tahan Lama',
-                                            'description' => 'Dirancang untuk bertahan hingga puluhan tahun dengan perawatan minimal.'
-                                        ],
-                                        [
-                                            'icon' => 'fas fa-bolt',
-                                            'title' => 'Anti Petir',
-                                            'description' => 'Dilengkapi dengan sistem anti petir yang melindungi bangunan dari sambaran listrik.'
-                                        ],
-                                        [
-                                            'icon' => 'fas fa-sun',
-                                            'title' => 'Insulasi Suhu',
-                                            'description' => 'Menjaga suhu ruangan tetap nyaman dengan menghalangi panas berlebih dari sinar matahari.'
-                                        ]
-                                    ];
-                                @endphp
-
-                                @foreach($layananItems as $index => $service)
-                                    <div class="swiper-slide px-2">
-                                        <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group relative">
-                                            <!-- Icon dengan efek glow -->
-                                            <div class="relative">
-
-                                                <div class="w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto mt-6 relative">
-                                                    <i class="{{ $service['icon'] }} text-blue-600 text-2xl"></i>
-                                                </div>
-                                            </div>
-
-                                            <!-- Content dengan efek hover -->
-                                            <div class="p-6 pt-2">
-                                                <h3 class="text-lg font-bold text-gray-800 mb-3 text-center group-hover:text-blue-600 transition-colors">
-                                                    {{ $service['title'] }}
-                                                </h3>
-
-                                                <p class="text-gray-600 text-center text-sm mb-4">
-                                                    {{ $service['description'] }}
-                                                </p>
-
-                                                <div class="flex justify-center">
-                                                    <a href="#" class="text-blue-600 text-sm font-semibold inline-flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:underline">
-                                                        Selengkapnya
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <!-- Border bottom accent -->
-                                            <div class="h-1 w-full bg-gradient-to-r from-blue-500 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endforelse
+                @foreach($services as $index => $service)
+                    <div class="group relative bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
+                        <!-- Number -->
+                        <div class="absolute top-6 right-6 text-6xl font-bold text-gray-100 group-hover:text-{{ $service['color'] }}-100 transition-colors">
+                            {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
                         </div>
+
+                        <!-- Icon -->
+                        <div class="w-16 h-16 bg-gradient-to-br from-{{ $service['color'] }}-50 to-{{ $service['color'] }}-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <div class="w-8 h-8 bg-{{ $service['color'] }}-500 rounded-lg"></div>
+                        </div>
+
+                        <!-- Content -->
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-{{ $service['color'] }}-600 transition-colors">
+                            {{ $service['title'] }}
+                        </h3>
+
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            {{ $service['description'] }}
+                        </p>
+
+                        <!-- Hover Border -->
+                        <div class="absolute inset-0 border-2 border-{{ $service['color'] }}-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
-                @else
-                    <!-- Standard Grid for <= 3 items -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                        @forelse($bannerLayananItems as $index => $item)
-                            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group relative
-                                {{ $index % 3 == 1 ? 'sm:translate-y-8' : '' }}"
-                            >
-                                <!-- Icon dengan efek glow -->
-                                <div class="relative">
-                                    
-                                    <div class="w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto mt-6 relative">
-                                        @if(!empty($item->image_icon))
-                                            <img src="{{ asset('storage/' . $item->image_icon) }}" alt="{{ $item->title }}" class="w-8 h-8">
-                                        @else
-                                            <i class="fas fa-check text-blue-600 text-2xl"></i>
-                                        @endif
-                                    </div>
-                                </div>
+                @endforeach
+            @endforelse
+        </div>
 
-                                <!-- Content dengan efek hover -->
-                                <div class="p-6 pt-2">
-                                    <h3 class="text-lg font-bold text-gray-800 mb-3 text-center group-hover:text-blue-600 transition-colors">
-                                        {{ $item->title }}
-                                    </h3>
-
-                                    <p class="text-gray-600 text-center text-sm mb-4">
-                                        {{ $item->description ?? '' }}
-                                    </p>
-                                </div>
-
-                                <!-- Border bottom accent -->
-                                <div class="h-1 w-full bg-gradient-to-r from-blue-500 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                            </div>
-                        @empty
-                            <!-- Kartu dinamis tanpa hardcoded data -->
-                            @php
-                                $layananItems = [
-                                    [
-                                        'icon' => 'fas fa-shield-alt',
-                                        'title' => 'Bahan Kokoh',
-                                        'description' => 'Material berkualitas tinggi yang tahan terhadap beban berat dan kondisi cuaca ekstrem.'
-                                    ],
-                                    [
-                                        'icon' => 'fas fa-tint-slash',
-                                        'title' => 'Anti Bocor',
-                                        'description' => 'Sistem pemasangan khusus yang menjamin atap Anda bebas dari kebocoran.'
-                                    ],
-                                    [
-                                        'icon' => 'fas fa-clock',
-                                        'title' => 'Tahan Lama',
-                                        'description' => 'Dirancang untuk bertahan hingga puluhan tahun dengan perawatan minimal.'
-                                    ]
-                                ];
-                            @endphp
-
-                            @foreach($layananItems as $index => $service)
-                                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group relative
-                                    {{ $index % 3 == 1 ? 'sm:translate-y-8' : '' }}"
-                                >
-                                    <!-- Icon dengan efek glow -->
-                                    <div class="relative">
-
-                                        <div class="w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto mt-6 relative">
-                                            <i class="{{ $service['icon'] }} text-blue-600 text-2xl"></i>
-                                        </div>
-                                    </div>
-
-                                    <!-- Content dengan efek hover -->
-                                    <div class="p-6 pt-2">
-                                        <h3 class="text-lg font-bold text-gray-800 mb-3 text-center group-hover:text-blue-600 transition-colors">
-                                            {{ $service['title'] }}
-                                        </h3>
-
-                                        <p class="text-gray-600 text-center text-sm mb-4">
-                                            {{ $service['description'] }}
-                                        </p>
-
-                                        <div class="flex justify-center">
-                                            <a href="#" class="text-blue-600 text-sm font-semibold inline-flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:underline">
-                                                Selengkapnya
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Border bottom accent -->
-                                    <div class="h-1 w-full bg-gradient-to-r from-blue-500 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                                </div>
-                            @endforeach
-                        @endforelse
-                    </div>
-                @endif
+        <!-- Bottom Section -->
+        <div class="text-center mt-20">
+            <p class="text-gray-500 text-sm uppercase tracking-widest mb-4">Trusted by industry leaders</p>
+            <div class="flex justify-center items-center space-x-12 opacity-40">
+                <!-- Placeholder for client logos -->
+                <div class="w-20 h-8 bg-gray-300 rounded"></div>
+                <div class="w-20 h-8 bg-gray-300 rounded"></div>
+                <div class="w-20 h-8 bg-gray-300 rounded"></div>
+                <div class="w-20 h-8 bg-gray-300 rounded"></div>
             </div>
         </div>
     </div>
 
-    @if(isset($useSlider) && $useSlider)
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            new Swiper('.swiper-layanan-container', {
-                slidesPerView: 1,
-                spaceBetween: 10,
-                autoplay: {
-                    delay: 3000,
-                    disableOnInteraction: false,
-                },
-                loop: true,
-                speed: 800,
-                breakpoints: {
-                    640: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 24,
-                    }
-                },
-                on: {
-                    init: function () {
-                        // Menerapkan efek escalonated pada slide tengah
-                        setTimeout(() => {
-                            const activeIndex = this.activeIndex;
-                            const slides = document.querySelectorAll('.swiper-layanan-container .swiper-slide');
-                            slides.forEach((slide, index) => {
-                                if ((index - activeIndex) % 3 === 1 || (index - activeIndex) % 3 === -2) {
-                                    slide.querySelector('.bg-white').classList.add('sm:translate-y-8');
-                                } else {
-                                    slide.querySelector('.bg-white').classList.remove('sm:translate-y-8');
-                                }
-                            });
-                        }, 100);
-                    },
-                    slideChangeTransitionEnd: function () {
-                        // Memperbarui efek escalonated saat slide berubah
-                        const activeIndex = this.activeIndex;
-                        const slides = document.querySelectorAll('.swiper-layanan-container .swiper-slide');
-                        slides.forEach((slide, index) => {
-                            if ((index - activeIndex) % 3 === 1 || (index - activeIndex) % 3 === -2) {
-                                slide.querySelector('.bg-white').classList.add('sm:translate-y-8');
-                            } else {
-                                slide.querySelector('.bg-white').classList.remove('sm:translate-y-8');
-                            }
-                        });
-                    }
-                }
-            });
-        });
-    </script>
-    @endif
 </section>
+
+<style>
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-float-delayed {
+        animation: float 6s ease-in-out infinite;
+        animation-delay: 3s;
+    }
+
+    /* Custom scrollbar for modern look */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+</style>
