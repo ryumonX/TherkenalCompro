@@ -1,9 +1,37 @@
-@props(['sliders' => [], 'hero' => null, 'heroItems' => []])
+<?php $attributes ??= new \Illuminate\View\ComponentAttributeBag;
+
+$__newAttributes = [];
+$__propNames = \Illuminate\View\ComponentAttributeBag::extractPropNames((['sliders' => [], 'hero' => null, 'heroItems' => []]));
+
+foreach ($attributes->all() as $__key => $__value) {
+    if (in_array($__key, $__propNames)) {
+        $$__key = $$__key ?? $__value;
+    } else {
+        $__newAttributes[$__key] = $__value;
+    }
+}
+
+$attributes = new \Illuminate\View\ComponentAttributeBag($__newAttributes);
+
+unset($__propNames);
+unset($__newAttributes);
+
+foreach (array_filter((['sliders' => [], 'hero' => null, 'heroItems' => []]), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
+    $$__key = $$__key ?? $__value;
+}
+
+$__defined_vars = get_defined_vars();
+
+foreach ($attributes->all() as $__key => $__value) {
+    if (array_key_exists($__key, $__defined_vars)) unset($$__key);
+}
+
+unset($__defined_vars); ?>
 
 <section id="home" class="relative overflow-hidden">
     <div class="swiper main-slider h-[650px] shadow-2xl overflow-hidden relative">
         <div class="swiper-wrapper">
-            @forelse($sliders as $slider)
+            <?php $__empty_1 = true; $__currentLoopData = $sliders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slider): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                 <div class="swiper-slide group">
                     <div class="w-full h-full relative overflow-hidden">
                         <!-- Animated background overlay -->
@@ -19,7 +47,7 @@
                         </div>
 
                         <img
-                            src="{{ asset('storage/' . $slider->image) }}"
+                            src="<?php echo e(asset('storage/' . $slider->image)); ?>"
                             alt="Slider Image"
                             class="w-full h-full object-cover object-center scale-110 group-hover:scale-105 transition-all duration-1000 ease-out filter brightness-90 group-hover:brightness-110"
                         />
@@ -31,30 +59,32 @@
                         <div class="absolute top-20 right-20 w-32 h-32 border-2 border-white/20 rounded-full animate-pulse-slow opacity-60"></div>
                         <div class="absolute bottom-32 left-20 w-16 h-16 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-lg rotate-45 animate-float opacity-70"></div>
 
-                        {{-- Enhanced Title/Description --}}
-                        @if(!empty($slider->title) || !empty($slider->description))
+                        
+                        <?php if(!empty($slider->title) || !empty($slider->description)): ?>
                         <div class="absolute bottom-16 left-12 z-20 text-white space-y-4 max-w-2xl">
                             <!-- Glassmorphism container -->
                             <div class="backdrop-blur-xl bg-white/10 border border-white/20 p-8 rounded-2xl shadow-2xl transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-800 ease-out">
-                                @if(!empty($slider->title))
+                                <?php if(!empty($slider->title)): ?>
                                     <h2 class="text-4xl md:text-5xl font-extrabold drop-shadow-2xl mb-4 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent leading-tight">
-                                        {{ $slider->title }}
+                                        <?php echo e($slider->title); ?>
+
                                     </h2>
-                                @endif
-                                @if(!empty($slider->description))
+                                <?php endif; ?>
+                                <?php if(!empty($slider->description)): ?>
                                     <p class="text-lg md:text-xl text-gray-100 leading-relaxed opacity-90">
-                                        {{ $slider->description }}
+                                        <?php echo e($slider->description); ?>
+
                                     </p>
-                                @endif
+                                <?php endif; ?>
 
                                 <!-- Interactive CTA button -->
 
                             </div>
                         </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
-            @empty
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                 <div class="swiper-slide">
                     <div class="w-full h-full relative overflow-hidden bg-gradient-to-br from-gray-300 via-gray-200 to-gray-100 flex items-center justify-center">
                         <div class="text-center space-y-4">
@@ -68,7 +98,7 @@
                         </div>
                     </div>
                 </div>
-            @endforelse
+            <?php endif; ?>
         </div>
 
 
@@ -86,28 +116,30 @@
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8 bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-8 transform hover:scale-[1.02] transition-all duration-500">
             <!-- Enhanced Title and Subtitle Section -->
             <div class="md:w-1/2 text-center space-y-4">
-                @if($hero)
+                <?php if($hero): ?>
                     <div class="relative">
                         <h2 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-gray-800 via-blue-600 to-purple-600 bg-clip-text text-transparent mb-4 leading-tight">
-                            {{ $hero->title }}
+                            <?php echo e($hero->title); ?>
+
                         </h2>
                         <div class="absolute -top-2 -left-2 w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full opacity-20 animate-pulse"></div>
                     </div>
                     <p class="text-md md:text-lg text-gray-600 leading-relaxed relative">
-                        {{ $hero->subtitle }}
+                        <?php echo e($hero->subtitle); ?>
+
                         <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
                     </p>
-                @endif
+                <?php endif; ?>
             </div>
 
             <!-- Enhanced Hero Items Section -->
             <div class="md:w-1/2">
-                @if(count($heroItems) > 2)
+                <?php if(count($heroItems) > 2): ?>
                     <!-- Enhanced Hero Items Slider -->
                     <div class="hero-items-slider relative">
                         <div class="swiper hero-swiper overflow-hidden rounded-2xl">
                             <div class="swiper-wrapper">
-                                @foreach($heroItems as $item)
+                                <?php $__currentLoopData = $heroItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="swiper-slide">
                                         <div class="relative overflow-hidden bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 rounded-2xl shadow-xl py-12 px-6 flex flex-col items-center group/item transform hover:scale-105 transition-all duration-300">
                                             <!-- Animated background pattern -->
@@ -118,10 +150,12 @@
 
                                             <div class="relative z-10">
                                                 <h3 class="text-2xl md:text-3xl font-bold text-white mb-2 group-hover/item:scale-110 transition-transform duration-300">
-                                                    {{ $item->title }}
+                                                    <?php echo e($item->title); ?>
+
                                                 </h3>
                                                 <p class="text-base md:text-lg text-blue-100 text-center leading-relaxed">
-                                                    {{ $item->subtitle }}
+                                                    <?php echo e($item->subtitle); ?>
+
                                                 </p>
                                             </div>
 
@@ -129,7 +163,7 @@
                                             <div class="absolute inset-0 bg-gradient-to-br from-purple-600/50 to-pink-600/50 opacity-0 group-hover/item:opacity-100 transition-all duration-300 rounded-2xl"></div>
                                         </div>
                                     </div>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
 
                             <!-- Enhanced Custom Navigation Buttons -->
@@ -141,10 +175,10 @@
                             </div>
                         </div>
                     </div>
-                @else
+                <?php else: ?>
                     <!-- Enhanced Regular grid -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        @forelse($heroItems as $item)
+                        <?php $__empty_1 = true; $__currentLoopData = $heroItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                             <div class="relative overflow-hidden bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 rounded-2xl shadow-xl py-12 px-6 flex flex-col items-center group/item transform hover:scale-105 hover:rotate-1 transition-all duration-300">
                                 <!-- Animated background -->
                                 <div class="absolute inset-0 opacity-10">
@@ -154,17 +188,19 @@
 
                                 <div class="relative z-10">
                                     <h3 class="text-2xl md:text-3xl font-bold text-white mb-2 group-hover/item:scale-110 transition-transform duration-300">
-                                        {{ $item->title }}
+                                        <?php echo e($item->title); ?>
+
                                     </h3>
                                     <p class="text-base md:text-lg text-blue-100 text-center">
-                                        {{ $item->subtitle }}
+                                        <?php echo e($item->subtitle); ?>
+
                                     </p>
                                 </div>
 
                                 <!-- Hover effect -->
                                 <div class="absolute inset-0 bg-gradient-to-br from-purple-600/50 to-pink-600/50 opacity-0 group-hover/item:opacity-100 transition-all duration-300 rounded-2xl"></div>
                             </div>
-                        @empty
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                             <!-- Enhanced Default Cards -->
                             <div class="relative overflow-hidden bg-white rounded-2xl shadow-xl border border-gray-100 p-8 flex flex-col items-center group/card transform hover:scale-105 hover:-rotate-1 transition-all duration-300">
                                 <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
@@ -195,15 +231,15 @@
                                 <!-- Decorative elements -->
                                 <div class="absolute top-4 right-4 w-8 h-8 bg-purple-100 rounded-full opacity-50 animate-pulse"></div>
                             </div>
-                        @endforelse
+                        <?php endif; ?>
                     </div>
-                @endif
+                <?php endif; ?>
             </div>
         </div>
     </div>
 </section>
 
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 <style>
     /* Enhanced pagination styles */
     .swiper-pagination-bullet {
@@ -302,9 +338,9 @@
         background: linear-gradient(45deg, #2563eb, #7c3aed);
     }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Enhanced main slider with progress bar
@@ -460,4 +496,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+<?php /**PATH D:\coding\Therkenal\therkenal\resources\views/components/home-components/slider.blade.php ENDPATH**/ ?>

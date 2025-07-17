@@ -200,7 +200,7 @@
             <div class="hidden md:flex items-center gap-1 lg:gap-4">
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center gap-1 lg:gap-4">
-                    @php
+                    <?php
                         $navs = [
                             [
                                 'label' => 'Beranda',
@@ -233,16 +233,16 @@
                                 'submenu' => false,
                             ],
                         ];
-                    @endphp
+                    ?>
 
-                    @foreach ($navs as $nav)
-                        @if ($nav['submenu'])
+                    <?php $__currentLoopData = $navs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $nav): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php if($nav['submenu']): ?>
                             <!-- Dropdown Menu -->
                             <div class="relative group/dropdown">
-                                <a href="{{ $nav['route'] }}"
+                                <a href="<?php echo e($nav['route']); ?>"
                                     class="menu-item flex items-center px-4 py-2 font-medium text-base transition-all duration-300 rounded-lg
-                   {{ $nav['active'] ? 'text-emerald-700 font-semibold' : 'text-gray-700 hover:text-emerald-600' }}">
-                                    <span>{{ $nav['label'] }}</span>
+                   <?php echo e($nav['active'] ? 'text-emerald-700 font-semibold' : 'text-gray-700 hover:text-emerald-600'); ?>">
+                                    <span><?php echo e($nav['label']); ?></span>
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class="h-4 w-4 ml-1 transform transition-transform duration-300 group-hover/dropdown:rotate-180"
                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -255,30 +255,30 @@
                                 <div
                                     class="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-emerald-100 opacity-0 translate-y-2 pointer-events-none transition-all duration-300 group-hover/dropdown:opacity-100 group-hover/dropdown:translate-y-0 group-hover/dropdown:pointer-events-auto">
                                     <div class="py-3 px-2">
-                                        @foreach ($nav['items'] as $item)
-                                            <a href="{{ $item['route'] }}"
+                                        <?php $__currentLoopData = $nav['items']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <a href="<?php echo e($item['route']); ?>"
                                                 class="block px-4 py-3 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition-all duration-200 hover-lift">
-                                                <div class="font-medium">{{ $item['label'] }}</div>
-                                                @if (!empty($item['desc']))
-                                                    <div class="text-xs text-gray-500">{{ $item['desc'] }}</div>
-                                                @endif
+                                                <div class="font-medium"><?php echo e($item['label']); ?></div>
+                                                <?php if(!empty($item['desc'])): ?>
+                                                    <div class="text-xs text-gray-500"><?php echo e($item['desc']); ?></div>
+                                                <?php endif; ?>
                                             </a>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </div>
                                 </div>
                             </div>
-                        @else
+                        <?php else: ?>
                             <!-- Normal Menu Item -->
-                            <a href="{{ $nav['route'] }}"
+                            <a href="<?php echo e($nav['route']); ?>"
                                 class="menu-item animated-underline px-4 py-2 font-medium text-base transition-all duration-300 rounded-lg
-               {{ $nav['active'] ? 'text-emerald-700 font-semibold active' : 'text-gray-700 hover:text-emerald-600' }}">
-                                <span>{{ $nav['label'] }}</span>
+               <?php echo e($nav['active'] ? 'text-emerald-700 font-semibold active' : 'text-gray-700 hover:text-emerald-600'); ?>">
+                                <span><?php echo e($nav['label']); ?></span>
                             </a>
-                        @endif
-                    @endforeach
+                        <?php endif; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                     <!-- CTA Button -->
-                    <a href="{{ route('kontak') }}"
+                    <a href="<?php echo e(route('kontak')); ?>"
                         class="ml-4 px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-1 pulse-green scale-animation">
                         <span class="flex items-center gap-2">
                             <i class="fas fa-rocket text-sm"></i>
@@ -322,12 +322,12 @@
 
             <div class="flex-grow overflow-y-auto py-8 px-6">
                 <nav class="flex flex-col space-y-3">
-                    @foreach ($navs as $nav)
-                        @if ($nav['submenu'])
+                    <?php $__currentLoopData = $navs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $nav): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php if($nav['submenu']): ?>
                             <div class="mobile-dropdown">
                                 <button
                                     class="mobile-dropdown-toggle w-full flex items-center justify-between text-white text-xl font-bold px-4 py-3 rounded-xl transition-all duration-300 hover:bg-white/10">
-                                    <span>{{ $nav['label'] }}</span>
+                                    <span><?php echo e($nav['label']); ?></span>
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class="h-5 w-5 transform transition-transform duration-300" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
@@ -336,28 +336,30 @@
                                     </svg>
                                 </button>
                                 <div class="mobile-dropdown-content hidden pl-4 mt-2 space-y-2">
-                                    @foreach ($nav['items'] as $item)
-                                        <a href="{{ $item['route'] }}"
+                                    <?php $__currentLoopData = $nav['items']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <a href="<?php echo e($item['route']); ?>"
                                             class="block text-white/80 hover:text-white text-lg px-4 py-2 rounded-xl hover:bg-white/10 transition-colors">
-                                            {{ $item['label'] }}
+                                            <?php echo e($item['label']); ?>
+
                                         </a>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
                             </div>
-                        @else
-                            <a href="{{ $nav['route'] }}"
+                        <?php else: ?>
+                            <a href="<?php echo e($nav['route']); ?>"
                                 class="text-white text-xl font-bold px-4 py-3 rounded-xl transition-all duration-300
-               {{ $nav['active'] ? 'bg-white/20 shadow-lg' : 'hover:bg-white/10' }}">
-                                {{ $nav['label'] }}
+               <?php echo e($nav['active'] ? 'bg-white/20 shadow-lg' : 'hover:bg-white/10'); ?>">
+                                <?php echo e($nav['label']); ?>
+
                             </a>
-                        @endif
-                    @endforeach
+                        <?php endif; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </nav>
             </div>
 
             <div class="p-6 border-t border-white/20">
                 <div class="flex flex-col items-center space-y-4">
-                    <a href="{{ route('kontak') }}"
+                    <a href="<?php echo e(route('kontak')); ?>"
                         class="w-full px-6 py-4 bg-white text-emerald-700 font-bold rounded-xl text-center shadow-lg transition-all duration-300 hover:bg-emerald-50 scale-animation">
                         <span class="flex items-center justify-center gap-2">
                             Hubungi Kami
@@ -480,3 +482,4 @@
             handleScroll();
         });
     </script>
+<?php /**PATH D:\coding\Therkenal\therkenal\resources\views/components/home-components/navbar.blade.php ENDPATH**/ ?>

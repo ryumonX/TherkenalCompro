@@ -1,4 +1,32 @@
-@props(['tentangKami' => null])
+<?php $attributes ??= new \Illuminate\View\ComponentAttributeBag;
+
+$__newAttributes = [];
+$__propNames = \Illuminate\View\ComponentAttributeBag::extractPropNames((['tentangKami' => null]));
+
+foreach ($attributes->all() as $__key => $__value) {
+    if (in_array($__key, $__propNames)) {
+        $$__key = $$__key ?? $__value;
+    } else {
+        $__newAttributes[$__key] = $__value;
+    }
+}
+
+$attributes = new \Illuminate\View\ComponentAttributeBag($__newAttributes);
+
+unset($__propNames);
+unset($__newAttributes);
+
+foreach (array_filter((['tentangKami' => null]), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
+    $$__key = $$__key ?? $__value;
+}
+
+$__defined_vars = get_defined_vars();
+
+foreach ($attributes->all() as $__key => $__value) {
+    if (array_key_exists($__key, $__defined_vars)) unset($$__key);
+}
+
+unset($__defined_vars); ?>
 
 <section id="tentang"
     class="py-32 relative overflow-hidden bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50 min-h-screen">
@@ -68,15 +96,15 @@
                 <!-- Main image container -->
                 <div
                     class="relative overflow-hidden rounded-3xl shadow-2xl border-4 border-white/80 backdrop-blur-sm group-hover:shadow-emerald-500/20 transition-all duration-700">
-                    @if ($tentangKami && $tentangKami->image)
-                        <img src="{{ asset('storage/' . $tentangKami->image) }}"
-                            alt="{{ $tentangKami->title ?? 'Tim Therkenal Creative Powerhouse' }}"
+                    <?php if($tentangKami && $tentangKami->image): ?>
+                        <img src="<?php echo e(asset('storage/' . $tentangKami->image)); ?>"
+                            alt="<?php echo e($tentangKami->title ?? 'Tim Therkenal Creative Powerhouse'); ?>"
                             class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-in-out">
-                    @else
+                    <?php else: ?>
                         <img src="https://readdy.ai/api/search-image?query=dynamic%20creative%20agency%20team%20brainstorming%20in%20colorful%20modern%20office%2C%20diverse%20designers%20with%20laptops%20and%20sticky%20notes%2C%20vibrant%20workspace%20with%20plants%20and%20neon%20lights&width=700&height=600&seq=creative-powerhouse&orientation=landscape"
                             alt="Tim Therkenal Creative Powerhouse"
                             class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-in-out">
-                    @endif
+                    <?php endif; ?>
 
                     <!-- Dynamic gradient overlay -->
                     <div
@@ -147,7 +175,8 @@
                     <div class="relative mb-6 animate-fade-in-up">
                         <h1
                             class="text-4xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-500 to-green-500 mb-4 leading-tight">
-                            {{ $tentangKami->subtitle ?? 'We Create Magic That Converts' }}
+                            <?php echo e($tentangKami->subtitle ?? 'We Create Magic That Converts'); ?>
+
                         </h1>
 
                         <!-- Animated underline -->
@@ -165,12 +194,13 @@
                     </p>
 
                     <!-- Enhanced description -->
-                    @if ($tentangKami && $tentangKami->description)
+                    <?php if($tentangKami && $tentangKami->description): ?>
                         <div class="text-gray-700 mb-12 leading-relaxed space-y-6 text-lg">
-                            {!! $tentangKami->description !!}
+                            <?php echo $tentangKami->description; ?>
+
                         </div>
-                    @else
-                    @endif
+                    <?php else: ?>
+                    <?php endif; ?>
                     <div class="space-y-8 mb-12">
                         <!-- Feature 1 -->
                         <div class="flex items-start gap-6 group hover:translate-x-2 transition-transform duration-300">
@@ -361,3 +391,4 @@
         background-size: 20px 20px;
     }
 </style>
+<?php /**PATH D:\coding\Therkenal\therkenal\resources\views/components/home-components/tentang-kami.blade.php ENDPATH**/ ?>
