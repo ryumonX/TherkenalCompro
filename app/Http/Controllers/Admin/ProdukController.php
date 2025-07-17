@@ -31,6 +31,7 @@ class ProdukController extends Controller
             'title'       => 'required|string|max:255',
             'description' => 'required|string',
             'is_active'   => 'required|boolean',
+            'price'       => 'required|integer|min:0',
         ]);
 
         $data['image'] = $request->file('image')->store('produk', 'public');
@@ -51,6 +52,7 @@ class ProdukController extends Controller
             'title'       => 'required|string|max:255',
             'description' => 'required|string',
             'is_active'   => 'required|boolean',
+            'price'       => 'required|integer|min:0',
         ]);
 
         if ($request->hasFile('image')) {

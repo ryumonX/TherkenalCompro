@@ -10,7 +10,7 @@ class Produk extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['image', 'title', 'description', 'is_active'];
+    protected $fillable = ['image', 'title', 'description', 'is_active', 'price'];
 
     public function scopeActive($query)
     {

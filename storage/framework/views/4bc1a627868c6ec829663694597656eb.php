@@ -70,7 +70,7 @@
                 <!-- Form -->
                 <form method="POST" action="/login" class="space-y-6">
                     <!-- CSRF Token (for Laravel) -->
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 
                     <!-- Email Input -->
                     <div class="group relative">
@@ -119,9 +119,7 @@
                             </div>
                             <span>Remember me</span>
                         </label>
-                        {{-- <a href="/forgot-password" class="text-gray-300 hover:text-white transition-colors duration-300 text-sm hover:underline">
-                            Forgot password?
-                        </a> --}}
+                        
                     </div>
 
                     <!-- Login Button -->
@@ -170,3 +168,4 @@
     </script>
 </body>
 </html>
+<?php /**PATH C:\Users\lenovo\Documents\TherkenalCompro\resources\views/auth/login.blade.php ENDPATH**/ ?>

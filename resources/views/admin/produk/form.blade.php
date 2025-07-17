@@ -33,6 +33,14 @@
         <x-input-error :messages="$errors->get('title')" />
     </div>
 
+    {{-- Harga --}}
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Harga Produk</label>
+        <input type="number" name="price" value="{{ old('price', $produk->price ?? '') }}"
+               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required min="0" />
+        <x-input-error :messages="$errors->get('price')" />
+    </div>
+
     {{-- Deskripsi --}}
     <div>
         <label class="block text-sm font-medium text-gray-700">Deskripsi Produk</label>
@@ -70,7 +78,7 @@
                 { name: 'insert', items: ['Link', 'Unlink'] },
                 { name: 'undo', items: ['Undo', 'Redo'] },
             ],
-            height: 300, // Atur tinggi editor
+            height: 300,
         });
     });
 </script>
