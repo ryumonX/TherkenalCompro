@@ -149,18 +149,6 @@
             @endforelse
         </div>
 
-        <!-- Bottom Section -->
-        <div class="text-center mt-20">
-            <p class="text-gray-500 text-sm uppercase tracking-widest mb-4">Trusted by industry leaders</p>
-            <div class="flex justify-center items-center space-x-12 opacity-40">
-                <!-- Placeholder for client logos -->
-                <div class="w-20 h-8 bg-gray-300 rounded"></div>
-                <div class="w-20 h-8 bg-gray-300 rounded"></div>
-                <div class="w-20 h-8 bg-gray-300 rounded"></div>
-                <div class="w-20 h-8 bg-gray-300 rounded"></div>
-            </div>
-        </div>
-    </div>
 
 </section>
 

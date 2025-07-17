@@ -21,6 +21,7 @@ use App\Models\FormKontak;
 use App\Models\GaleriProduk;
 use App\Models\HeroGaleriProduk;
 use App\Models\KategoriArtikel;
+use App\Models\Partner;
 use App\Models\SocialMediaImage;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,8 @@ class HomeController extends Controller
             'sliders' => Slider::active()->latest()->get(),
             'produk' => Produk::active()->latest()->get(),
             'artikel' => Artikel::active()->scheduled()->latest()->get(),
-            'kategoriArtikel' => KategoriArtikel::whereHas('artikels', function($q) {
+            'partners' => Partner::all(),
+            'kategoriArtikel' => KategoriArtikel::whereHas('artikels', function ($q) {
                 $q->active()->scheduled();
             })->get(),
 
@@ -41,7 +43,7 @@ class HomeController extends Controller
             'bannerLayananItems' => BannerLayananItem::all(),
             'heroItems' => HeroItem::latest()->get(),
             'keunggulanItems' => KeunggulanItem::all(),
-            'galeriProduk' => GaleriProduk::whereHas('heroSection', function($q) {})->latest()->get(),
+            'galeriProduk' => GaleriProduk::whereHas('heroSection', function ($q) {})->latest()->get(),
 
             // Model singleton (yang biasanya hanya 1 record, tanpa is_active)
             'tentangKami' => TentangKami::first(),
@@ -85,23 +87,23 @@ class HomeController extends Controller
         // Filter berdasarkan pencarian jika ada
         if ($request->has('search') && !empty($request->search)) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('preview_description', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
+                    ->orWhere('preview_description', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
             });
         }
 
         // Filter by kategori jika ada
         if ($request->has('kategori')) {
-            $query->whereHas('kategori', function($q) use($request) {
+            $query->whereHas('kategori', function ($q) use ($request) {
                 $q->where('slug', $request->kategori);
             });
         }
 
         // Tambahkan debug info
         $artikels = $query->latest()->paginate(10);
-        $kategories = KategoriArtikel::whereHas('artikels', function($q) {
+        $kategories = KategoriArtikel::whereHas('artikels', function ($q) {
             $q->active()->scheduled();
         })->get();
 

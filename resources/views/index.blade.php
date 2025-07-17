@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
+
 <body>
     <div class="font-sans min-h-screen bg-gray-50">
         <x-home-components.navbar />
@@ -26,7 +28,8 @@
             <x-home-components.slider :sliders="$sliders" :hero="$hero" :heroItems="$heroItems" />
             <x-home-components.tentang-kami :tentangKami="$tentangKami" />
             <x-home-components.layanan-kami :bannerLayananItems="$bannerLayananItems" :bannerLayanan="$bannerLayanan" />
-            <x-home-components.product :produk="$produk" :limit="9" :showViewAllButton="true"/>
+            <x-home-components.partner :partners="$partners" />
+            <x-home-components.product :produk="$produk" :limit="9" :showViewAllButton="true" />
             <x-home-components.keunggulan :keunggulan="$keunggulan" :keunggulanItems="$keunggulanItems" />
             <x-home-components.galeri :heroGaleriProduk="$heroGaleriProduk" :galeriProduk="$galeriProduk" />
             <x-home-components.hubungi-kami />
@@ -40,4 +43,5 @@
 
     @stack('scripts')
 </body>
+
 </html>
