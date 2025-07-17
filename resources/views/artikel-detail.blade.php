@@ -24,6 +24,7 @@
     <div class="font-sans min-h-screen bg-gray-50">
         <x-home-components.navbar />
         <x-home-components.floating-button />
+        
         <main class="pt-4">
             <x-home-components.artikel-detail :artikel="$artikel" :artikelTerkait="$artikelTerkait" />
             <x-home-components.footer />
