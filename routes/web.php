@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SosialMediaController;
 use App\Http\Controllers\Admin\TentangKamiController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\InfluencerController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
@@ -128,6 +129,19 @@ Route::prefix('admin')
         Route::get('keunggulan/item/{item}/edit',         [KeunggulanController::class, 'editItem'])->name('keunggulan.item.edit')->middleware('auth');
         Route::put('keunggulan/item/{item}',              [KeunggulanController::class, 'updateItem'])->name('keunggulan.item.update')->middleware('auth');
         Route::delete('keunggulan/item/{item}',              [KeunggulanController::class, 'destroyItem'])->name('keunggulan.item.destroy')->middleware('auth');
+
+
+
+        /* ------------------------------------------------------------------
+        | influencers
+        |------------------------------------------------------------------*/
+        Route::get('/influencers', [InfluencerController::class, 'index'])->name('influencers.index')->middleware('auth');
+        Route::get('/influencers/item', [InfluencerController::class, 'create'])->name('influencers.create')->middleware('auth');
+        Route::post('/influencers', [InfluencerController::class, 'store'])->name('influencers.store')->middleware('auth');
+        Route::get('/influencers/{influencer}/edit', [InfluencerController::class, 'edit'])->name('influencers.edit')->middleware('auth');
+        Route::put('/influencers/{influencer}', [InfluencerController::class, 'update'])->name('influencers.update')->middleware('auth');
+        Route::delete('/influencers/{influencer}', [InfluencerController::class, 'destroy'])->name('influencers.destroy')->middleware('auth');
+
 
         /* ------------------------------------------------------------------
         | Galeri Produk

@@ -119,15 +119,15 @@
                     <!-- Tagline -->
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 leading-tight">
                         {{ $hero->subtitle }}
-                        <span class="text-green-600">Make You Known</span>
+                        <span class="text-green-600">Dikenal</span>
                     </h2>
 
                     <!-- Description -->
                     <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed max-w-xl">
-                        We transform your ideas into powerful digital experiences. From stunning websites to innovative
-                        marketing strategies,
-                        we help your brand stand out in the digital landscape.
+                        We craft original digital ideas and impactful strategies to make your brand truly stand out.  
+                        From authentic narratives to engaging experiences — we Make You Known.
                     </p>
+
 
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

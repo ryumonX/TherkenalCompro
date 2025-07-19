@@ -183,18 +183,26 @@
         <div
             class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center transition-all duration-500">
             <!-- Logo & Brand -->
-            <a href="#" class="flex items-center gap-4 group relative z-10 hover-lift">
-                <div class="flex items-center logo-glow">
-                    <div class="relative">
-                        <span class="text-emerald-600 font-bold text-2xl tracking-tight">The</span>
-                        <span class="text-emerald-800 font-extrabold text-2xl tracking-tight">rkenal</span>
-                        <div class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full floating"></div>
-                    </div>
-                </div>
-                <div class="hidden sm:block">
-                    <div class="text-xs text-emerald-600 font-medium tracking-wider uppercase">Digital Agency</div>
-                </div>
-            </a>
+ <a href="#" class="relative inline-block group z-10">
+  <div class="relative inline-block transition-transform duration-300 ease-in-out group-hover:-translate-y-1">
+    <img
+      src="{{ asset('storage/' . $configWeb->logo) }}"
+      alt="{{ $configWeb->title ?? 'Therkenal' }}"
+      class="h-auto max-h-14 max-w-[150px] object-contain rounded-xl shadow-lg ring-2 ring-emerald-300/40 logo-glow transition-all duration-500"
+    />
+
+    <!-- Ping Dot / Accent -->
+    <span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 animate-ping"></span>
+    <span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-500"></span>
+  </div>
+
+  <!-- Optional Subtitle -->
+  <div class="hidden sm:block mt-2 text-center">
+    <div class="text-[11px] font-medium tracking-widest text-emerald-600 uppercase">Digital Agency</div>
+  </div>
+</a>
+
+
 
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center gap-1 lg:gap-4">
@@ -220,12 +228,7 @@
                                 'active' => request()->routeIs('produk.*'),
                                 'submenu' => false,
                             ],
-                            [
-                                'label' => 'Artikel',
-                                'route' => route('artikel.index'),
-                                'active' => request()->routeIs('artikel.*'),
-                                'submenu' => false,
-                            ],
+    
                             [
                                 'label' => 'Kontak',
                                 'route' => route('kontak'),
