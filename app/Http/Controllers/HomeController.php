@@ -22,6 +22,7 @@ use App\Models\GaleriProduk;
 use App\Models\HeroGaleriProduk;
 use App\Models\KategoriArtikel;
 use App\Models\Partner;
+use App\models\Influencer;
 use App\Models\SocialMediaImage;
 use Illuminate\Http\Request;
 
@@ -35,6 +36,7 @@ class HomeController extends Controller
             'produk' => Produk::active()->latest()->get(),
             'artikel' => Artikel::active()->scheduled()->latest()->get(),
             'partners' => Partner::all(),
+            'influencers' => Influencer::latest()->get(),
             'kategoriArtikel' => KategoriArtikel::whereHas('artikels', function ($q) {
                 $q->active()->scheduled();
             })->get(),

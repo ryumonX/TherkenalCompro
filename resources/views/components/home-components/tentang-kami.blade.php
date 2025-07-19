@@ -71,6 +71,7 @@
                     @if ($tentangKami && $tentangKami->image)
                         <img src="{{ asset('storage/' . $tentangKami->image) }}"
                             alt="{{ $tentangKami->title ?? 'Tim Therkenal Creative Powerhouse' }}"
+                            loading="lazy"
                             class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-in-out">
                     @else
                         <img src="https://readdy.ai/api/search-image?query=dynamic%20creative%20agency%20team%20brainstorming%20in%20colorful%20modern%20office%2C%20diverse%20designers%20with%20laptops%20and%20sticky%20notes%2C%20vibrant%20workspace%20with%20plants%20and%20neon%20lights&width=700&height=600&seq=creative-powerhouse&orientation=landscape"
@@ -166,57 +167,52 @@
 
                     <!-- Enhanced description -->
                     @if ($tentangKami && $tentangKami->description)
+                        @php
+                            $cleanDescription = preg_replace('/<ul.*?<\/ul>/s', '', $tentangKami->description);
+                        @endphp
                         <div class="text-gray-700 mb-12 leading-relaxed space-y-6 text-lg">
-                            {!! $tentangKami->description !!}
+                            {!! $cleanDescription !!}
                         </div>
-                    @else
                     @endif
-                    <div class="space-y-8 mb-12">
-                        <!-- Feature 1 -->
-                        <div class="flex items-start gap-6 group hover:translate-x-2 transition-transform duration-300">
-                            <div
-                                class="flex-shrink-0 p-4 rounded-3xl bg-gradient-to-br from-emerald-100 to-teal-100 text-emerald-600 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="font-black text-xl text-gray-800 mb-3 flex items-center gap-2">
-                                    Unlimited Creative Innovation
-                                    <span class="text-emerald-500 animate-pulse">✨</span>
-                                </h3>
-                                <p class="text-gray-600 leading-relaxed text-base">
-                                    Therkenal memadukan kreativitas tanpa batas dan teknologi mutakhir untuk brand yang
-                                    berkesan dan kampanye yang viral.
-                                </p>
-                            </div>
-                        </div>
 
-                        <!-- Feature 2 -->
-                        <div class="flex items-start gap-6 group hover:translate-x-2 transition-transform duration-300">
-                            <div
-                                class="flex-shrink-0 p-4 rounded-3xl bg-gradient-to-br from-teal-100 to-green-100 text-teal-600 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="font-black text-xl text-gray-800 mb-3 flex items-center gap-2">
-                                    Digital Transformation Mastery
-                                    <span class="text-teal-500 animate-bounce">🚀</span>
-                                </h3>
-                                <p class="text-gray-600 leading-relaxed text-base">
-                                    Solusi kreatif 360° — dari brand yang ikonik, web cepat kilat, hingga konten yang
-                                    bikin berhenti scroll.
-                                </p>
-                            </div>
+                    @if ($tentangKami && $tentangKami->description && Str::contains($tentangKami->description, '<ul>'))
+                        <div class="space-y-8 mb-12">
+                            @php
+                                $dom = new DOMDocument();
+                                libxml_use_internal_errors(true); // Suppress HTML5 warnings
+                            $dom->loadHTML('<?xml encoding="utf-8" @endphp' . $tentangKami->description);
+$lis = $dom->getElementsByTagName('li');
+?>
 
+                            @foreach ($lis as $index => $li)
+                                @php
+                                    $html = trim($li->ownerDocument->saveHTML($li));
+                                    preg_match('/<strong>(.*?)<\/strong>/', $html, $matches);
+                                    $title = $matches[1] ?? 'Feature ' . ($index + 1);
+                                    $desc = preg_replace('/<strong>.*?<\/strong> ?[—–-]? ?/', '', strip_tags($html));
+                                @endphp
+
+                                <div
+                                    class="flex items-start gap-6 group hover:translate-x-2 transition-transform duration-300">
+                                    <div
+                                        class="flex-shrink-0 p-4 rounded-3xl bg-gradient-to-br from-emerald-100 to-teal-100 text-emerald-600 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="mt-4 font-black text-xl text-gray-800 mb-3 flex items-center ">
+                                            {{ $desc }}
+                                            <span class="text-emerald-500 animate-pulse">✨</span>
+                                        </h3>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                    </div>
+                    @endif
+
 
 
                     <!-- Stats Section -->
@@ -288,7 +284,7 @@
                     </div>
 
                     <!-- Social proof badges -->
-                    <div class="mt-12 flex flex-wrap gap-4">
+                    <div class="mt-12 flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-4">
                         <div
                             class="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-emerald-100 shadow-sm">
                             <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
@@ -302,9 +298,10 @@
                         <div
                             class="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-green-100 shadow-sm">
                             <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                            <span class="text-sm font-medium text-gray-700">100% Client Satisfaction</span>
+                            <span class="text-sm font-medium text-gray-700 text-center">100% Client Satisfaction</span>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

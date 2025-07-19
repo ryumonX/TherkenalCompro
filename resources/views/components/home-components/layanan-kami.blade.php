@@ -59,7 +59,7 @@
                     <!-- Icon -->
                     <div class="w-16 h-16 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         @if(!empty($item->image_icon))
-                            <img src="{{ asset('storage/' . $item->image_icon) }}" alt="{{ $item->title }}" class="w-8 h-8">
+                            <img src="{{ asset('storage/' . $item->image_icon) }}" alt="{{ $item->title }}" class="w-8 h-8 loading="lazy"">
                         @else
                             <div class="w-8 h-8 bg-blue-500 rounded-lg"></div>
                         @endif
@@ -74,52 +74,11 @@
                         {{ $item->description ?? '' }}
                     </p>
 
-                    <!-- Learn More Link -->
-                    <a href="#" class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        Learn More
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                        </svg>
-                    </a>
 
                     <!-- Hover Border -->
                     <div class="absolute inset-0 border-2 border-blue-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
             @empty
-                @php
-                    $services = [
-                        [
-                            'title' => 'Brand Strategy',
-                            'description' => 'Comprehensive brand development that captures your unique essence and connects with your audience.',
-                            'color' => 'blue'
-                        ],
-                        [
-                            'title' => 'Digital Design',
-                            'description' => 'Modern, responsive designs that deliver exceptional user experiences across all devices.',
-                            'color' => 'purple'
-                        ],
-                        [
-                            'title' => 'Development',
-                            'description' => 'Cutting-edge web solutions built with the latest technologies and best practices.',
-                            'color' => 'cyan'
-                        ],
-                        [
-                            'title' => 'Marketing',
-                            'description' => 'Data-driven marketing strategies that amplify your brand and drive measurable results.',
-                            'color' => 'indigo'
-                        ],
-                        [
-                            'title' => 'Analytics',
-                            'description' => 'Deep insights and performance tracking to optimize your digital presence.',
-                            'color' => 'pink'
-                        ],
-                        [
-                            'title' => 'Consultation',
-                            'description' => 'Expert guidance and strategic planning to accelerate your business growth.',
-                            'color' => 'green'
-                        ]
-                    ];
-                @endphp
 
                 @foreach($services as $index => $service)
                     <div class="group relative bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">

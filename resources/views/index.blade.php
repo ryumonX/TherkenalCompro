@@ -28,12 +28,12 @@
             <x-home-components.slider :sliders="$sliders" :hero="$hero" :heroItems="$heroItems" />
             <x-home-components.tentang-kami :tentangKami="$tentangKami" />
             <x-home-components.layanan-kami :bannerLayananItems="$bannerLayananItems" :bannerLayanan="$bannerLayanan" />
+            <x-home-components.influencer :influencer="$influencers" />
             <x-home-components.partner :partners="$partners" />
             <x-home-components.product :produk="$produk" :limit="9" :showViewAllButton="true" />
             <x-home-components.keunggulan :keunggulan="$keunggulan" :keunggulanItems="$keunggulanItems" />
             <x-home-components.galeri :heroGaleriProduk="$heroGaleriProduk" :galeriProduk="$galeriProduk" />
             <x-home-components.hubungi-kami />
-            <x-home-components.artikel-home :artikel="$artikel" :kategoriArtikel="$kategoriArtikel" :socialMedia="$socialMedia" />
             <x-home-components.footer />
         </main>
     </div>
