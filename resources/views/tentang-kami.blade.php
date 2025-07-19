@@ -26,6 +26,7 @@
             <x-home-components.hubungi-kami />
             <x-home-components.breadcrumbs />
             <x-home-components.tentang-kami :tentangKami="$tentangKami" />
+            <x-home-components.value />
             <x-home-components.keunggulan :keunggulan="$keunggulan" :keunggulanItems="$keunggulanItems" />
             <x-home-components.footer />
         </main>
