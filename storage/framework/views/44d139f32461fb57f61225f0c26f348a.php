@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,7 @@
     <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
+
 <body>
     <div class="font-sans min-h-screen bg-gray-50">
         <?php if (isset($component)) { $__componentOriginal937ac4e2682e9a846176c46132ee5d73 = $component; } ?>
@@ -120,6 +122,26 @@
 <?php if (isset($__componentOriginal25584d7325543bacc1b329fbdf14b494)): ?>
 <?php $component = $__componentOriginal25584d7325543bacc1b329fbdf14b494; ?>
 <?php unset($__componentOriginal25584d7325543bacc1b329fbdf14b494); ?>
+<?php endif; ?>
+            <?php if (isset($component)) { $__componentOriginal2e762daf493d91da7b30c13113f72823 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal2e762daf493d91da7b30c13113f72823 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.home-components.partner','data' => ['partners' => $partners]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('home-components.partner'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['partners' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($partners)]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal2e762daf493d91da7b30c13113f72823)): ?>
+<?php $attributes = $__attributesOriginal2e762daf493d91da7b30c13113f72823; ?>
+<?php unset($__attributesOriginal2e762daf493d91da7b30c13113f72823); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal2e762daf493d91da7b30c13113f72823)): ?>
+<?php $component = $__componentOriginal2e762daf493d91da7b30c13113f72823; ?>
+<?php unset($__componentOriginal2e762daf493d91da7b30c13113f72823); ?>
 <?php endif; ?>
             <?php if (isset($component)) { $__componentOriginal768fbb13946e26c08ef2f923ff4c7b52 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal768fbb13946e26c08ef2f923ff4c7b52 = $attributes; } ?>
@@ -249,5 +271,6 @@
 
     <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
+
 </html>
 <?php /**PATH C:\Users\lenovo\Documents\TherkenalCompro\resources\views/index.blade.php ENDPATH**/ ?>
